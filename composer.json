@@ -4,7 +4,8 @@
     "keywords": [
         "mail",
         "mailjet",
-        "mailtemplate"
+        "mailtemplate",
+        "laravel"
     ],
     "license": "MIT",
     "authors": [
