@@ -1,0 +1,32 @@
+{
+    "name": "loots-it/laravel-mail-template-channel",
+    "description": "An alternative for the standard mail channel that uses an external template for its content. An example of such a service that provides such templates is Mailjet, for which the implementation is provided.",
+    "keywords": [
+        "mail",
+        "mailjet",
+        "mailtemplate"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laurens Loots",
+            "email": "laurens@loots-it.be"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lootsit\\ExternalMailTemplateChannel\\": "src/"
+        }
+    },
+    "require": {
+        "laravel/framework": "^8.0",
+        "mailjet/mailjet-apiv3-php": "^1.5"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lootsit\\ExternalMailTemplateChannel\\MailTemplateDriverServiceProvider"
+            ]
+        }
+    }
+}
