@@ -15,7 +15,7 @@ class MailTemplateChannelServiceProvider extends ServiceProvider implements Defe
      * @var array
      */
     public $singletons = [
-        ExternalMailTemplateChannel::class
+        ExternalMailTemplateChannel::class => ExternalMailTemplateChannel::class
     ];
 
     /**
