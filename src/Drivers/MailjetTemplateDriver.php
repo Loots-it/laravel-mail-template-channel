@@ -41,12 +41,14 @@ class MailjetTemplateDriver implements MailTemplateDriver
             "From" => [],
             "To" => $message->to,
             "ReplyTo" => [],
-            "Subject" => $message->subject,
             "TemplateLanguage" => true,
             "TemplateID" => $message->templateID,
             "Variables" => $message->variables
         ];
 
+        if ($message->subject) {
+            $body["Subject"] = $message->subject;
+        }
         if ($message->fromName) {
             $body["From"]["Name"] = $message->fromName;
         }

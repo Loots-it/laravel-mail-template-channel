@@ -10,15 +10,15 @@ class MailTemplateMessage
     public int $templateID;
     public array $variables;
 
-    public string $subject;
+    public ?string $subject = null;
 
-    public string $fromEmail;
-    public string $fromName;
+    public ?string $fromEmail = null;
+    public ?string $fromName = null;
 
-    public array $to;
+    public array $to = [];
 
-    public string $replyToEmail;
-    public string $replyToName;
+    public ?string $replyToEmail = null;
+    public ?string $replyToName = null;
 
     public function __construct(int $templateID, array $variables)
     {
