@@ -38,7 +38,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LootsIt\\LaravelMailTemplateChannel\\MailTemplateDriverServiceProvider"
+                "LootsIt\\LaravelMailTemplateChannel\\Providers\\MailTemplateDriverServiceProvider"
             ]
         }
     }
