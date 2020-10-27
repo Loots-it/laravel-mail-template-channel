@@ -6,7 +6,6 @@ use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use LootsIt\LaravelMailTemplateChannel\Drivers\MailjetTemplateDriver;
 use Lootsit\LaravelMailTemplateChannel\Drivers\MailTemplateDriver;
-use LootsIt\LaravelMailTemplateChannel\ExternalMailTemplateChannel;
 
 class MailTemplateDriverServiceProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -26,8 +25,6 @@ class MailTemplateDriverServiceProvider extends ServiceProvider implements Defer
      */
     public function provides()
     {
-        return [
-            MailTemplateDriver::class
-        ];
+        return [MailTemplateDriver::class];
     }
 }

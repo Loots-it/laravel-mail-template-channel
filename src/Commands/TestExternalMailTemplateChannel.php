@@ -37,12 +37,13 @@ class TestExternalMailTemplateChannel extends Command
     /**
      * Execute the console command.
      *
-     * @param int $templateID
      * @param ExternalMailTemplateChannel $channel
      * @return void
      */
-    public function handle(int $templateID, ExternalMailTemplateChannel $channel)
+    public function handle(ExternalMailTemplateChannel $channel)
     {
+        $templateID = $this->argument('templateID');
+
         $user = User::factory()->make();
         $notification = new TestNotification($templateID);
 
