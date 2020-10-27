@@ -1,0 +1,11 @@
+<phpunit bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Drivers">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="MAILJET_FROM_EMAILADDRESS" value="test@test.com" force="true" />
+        <env name="MAILJET_FROM_NAME" value="TestName" force="true" />
+    </php>
+</phpunit>

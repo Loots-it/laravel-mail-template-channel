@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lootsit\ExternalMailTemplateChannel;
+namespace LootsIt\LaravelMailTemplateChannel;
 
 
 class MailTemplateMessage
@@ -15,7 +15,7 @@ class MailTemplateMessage
     public ?string $fromEmail = null;
     public ?string $fromName = null;
 
-    public array $to = [];
+    public ?array $to = null;
 
     public ?string $replyToEmail = null;
     public ?string $replyToName = null;

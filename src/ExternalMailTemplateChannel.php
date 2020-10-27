@@ -1,8 +1,9 @@
 <?php
 
-namespace Lootsit\ExternalMailTemplateChannel;
+namespace LootsIt\LaravelMailTemplateChannel;
 
 use Illuminate\Notifications\Notification;
+use Lootsit\LaravelMailTemplateChannel\Drivers\MailTemplateDriver;
 
 class ExternalMailTemplateChannel
 {
@@ -13,10 +14,10 @@ class ExternalMailTemplateChannel
         $this->template_mailer = $template_mailer;
     }
 
-    public function send($notifiable, Notification $notification) {
+    public function send($notifiable, Notification $notification): bool {
         $message = $notification->toExternalMailTemplate($notifiable);
         $message = $this->extendMessage($notifiable, $notification, $message);
-        $this->template_mailer->send($message);
+        return $this->template_mailer->send($message);
     }
 
     protected function extendMessage($notifiable, Notification $notification, MailTemplateMessage $message): MailTemplateMessage {

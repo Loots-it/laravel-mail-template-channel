@@ -1,7 +1,8 @@
 <?php
 
-namespace Lootsit\ExternalMailTemplateChannel;
+namespace LootsIt\LaravelMailTemplateChannel\Drivers;
 
+use LootsIt\LaravelMailTemplateChannel\MailTemplateMessage;
 use Mailjet\Client;
 use Mailjet\Resources;
 
@@ -13,7 +14,9 @@ class MailjetTemplateDriver implements MailTemplateDriver
      *
      * @var \Mailjet\Client
      */
-    protected $mj_client;
+    private $mj_client;
+
+    private bool $testing = false;
 
 
     /**
@@ -29,13 +32,18 @@ class MailjetTemplateDriver implements MailTemplateDriver
         $this->mj_client = new Client($apikey, $apisecret, true, ['version' => 'v3.1']);
     }
 
+    public function setTesting(bool $testing)
+    {
+        $this->testing = $testing;
+    }
+
     /**
      * Send the given message.
      *
      * @param  MailTemplateMessage  $message
      * @return void
      */
-    public function send(MailTemplateMessage $message): void
+    public function send(MailTemplateMessage $message): bool
     {
         $body = [
             "From" => [],
@@ -64,6 +72,12 @@ class MailjetTemplateDriver implements MailTemplateDriver
 
         $body = ['Messages' => [$body]];
 
-        $this->mj_client->post(Resources::$Email, ['body' => $body]);
+        if ($this->testing) {
+            $body["SandboxMode"] = true;
+        }
+
+        return $this->mj_client
+            ->post(Resources::$Email, ['body' => $body])
+            ->success();
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
-namespace Lootsit\ExternalMailTemplateChannel;
+namespace LootsIt\LaravelMailTemplateChannel\Providers;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use LootsIt\LaravelMailTemplateChannel\Drivers\MailjetTemplateDriver;
+use Lootsit\LaravelMailTemplateChannel\Drivers\MailTemplateDriver;
 
 class MailTemplateDriverServiceProvider extends ServiceProvider implements DeferrableProvider
 {

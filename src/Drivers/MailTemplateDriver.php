@@ -1,6 +1,8 @@
 <?php
 
-namespace Lootsit\ExternalMailTemplateChannel;
+namespace Lootsit\LaravelMailTemplateChannel\Drivers;
+
+use LootsIt\LaravelMailTemplateChannel\MailTemplateMessage;
 
 interface MailTemplateDriver
 {
@@ -10,5 +12,5 @@ interface MailTemplateDriver
      * @param  MailTemplateMessage  $message
      * @return void
      */
-    public function send(MailTemplateMessage $message): void;
+    public function send(MailTemplateMessage $message): bool;
 }
