@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Lootsit\\ExternalMailTemplateChannel\\": "loots-it/src/"
+            "Lootsit\\ExternalMailTemplateChannel\\": "src/"
         }
     },
     "require": {
