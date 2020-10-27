@@ -15,33 +15,22 @@ class ExternalMailTemplateChannel
 
     public function send($notifiable, Notification $notification) {
         $message = $notification->toExternalMailTemplate($notifiable);
-        $body = $this->getBody($notifiable, $notification, $message);
-        $this->template_mailer->send($body);
+        $message = $this->extendMessage($notifiable, $notification, $message);
+        $this->template_mailer->send($message);
     }
 
-    protected function getBody($notifiable, Notification $notification, $message) {
-        if (!array_key_exists('From', $message)) {
-            $message['From'] = [
-                'Email' => getenv('MAILJET_FROM_EMAILADDRESS'),
-                'Name' => getenv('MAILJET_FROM_NAME')
-            ];
+    protected function extendMessage($notifiable, Notification $notification, MailTemplateMessage $message): MailTemplateMessage {
+        if (!$message->fromEmail and !$message->fromName) {
+            $message->fromEmail = getenv('MAILJET_FROM_EMAILADDRESS');
+            $message->fromName = getenv('MAILJET_FROM_NAME');
         }
+        if (!$message->replyToEmail and !$message->replyToName) {
+            $message->replyToEmail = getenv('MAILJET_FROM_EMAILADDRESS');
+            $message->replyToName = getenv('MAILJET_FROM_NAME');
+        }
+        $message->to ??= $this->getRecipients($notifiable, $notification);
 
-        if (!array_key_exists('To', $message)) {
-            $message['To'] = $this->getRecipients($notifiable, $notification);;
-        }
-
-        if (!array_key_exists('ReplyTo', $message)) {
-            $message['ReplyTo'] = [
-                'Email' => getenv('MAILJET_FROM_EMAILADDRESS'),
-                'Name' => getenv('MAILJET_FROM_NAME')
-            ];
-        }
-        if (!array_key_exists('TemplateLanguage', $message)) {
-            $message['TemplateLanguage'] = true;
-        }
-
-        return ['Messages' => [$message]];
+        return $message;
     }
 
     /**
@@ -51,7 +40,7 @@ class ExternalMailTemplateChannel
      * @param  \Illuminate\Notifications\Notification  $notification
      * @return mixed
      */
-    protected function getRecipients($notifiable, $notification)
+    protected function getRecipients($notifiable, $notification): array
     {
         if (is_string($recipients = $notifiable->routeNotificationFor('mail', $notification))) {
             $recipients = [$recipients];

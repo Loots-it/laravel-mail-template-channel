@@ -4,5 +4,11 @@ namespace Lootsit\ExternalMailTemplateChannel;
 
 interface MailTemplateDriver
 {
-    public function send($message);
+    /**
+     * Send the given message.
+     *
+     * @param  MailTemplateMessage  $message
+     * @return void
+     */
+    public function send(MailTemplateMessage $message): void;
 }

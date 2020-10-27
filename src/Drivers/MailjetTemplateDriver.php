@@ -30,13 +30,38 @@ class MailjetTemplateDriver implements MailTemplateDriver
     }
 
     /**
-     * Send the given body.
+     * Send the given message.
      *
-     * @param  mixed  $body
+     * @param  MailTemplateMessage  $message
      * @return void
      */
-    public function send($body)
+    public function send(MailTemplateMessage $message): void
     {
+        $body = [
+            "From" => [],
+            "To" => $message->to,
+            "ReplyTo" => [],
+            "Subject" => $message->subject,
+            "TemplateLanguage" => true,
+            "TemplateID" => $message->templateID,
+            "Variables" => $message->variables
+        ];
+
+        if ($message->fromName) {
+            $body["From"]["Name"] = $message->fromName;
+        }
+        if ($message->fromEmail) {
+            $body["From"]["Email"] = $message->fromEmail;
+        }
+        if ($message->replyToName) {
+            $body["ReplyTo"]["Name"] = $message->replyToName;
+        }
+        if ($message->replyToEmail) {
+            $body["ReplyTo"]["Email"] = $message->replyToEmail;
+        }
+
+        $body = ['Messages' => [$body]];
+
         $this->mj_client->post(Resources::$Email, ['body' => $body]);
     }
 }
