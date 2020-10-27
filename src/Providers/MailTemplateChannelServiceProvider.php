@@ -1,14 +1,13 @@
 <?php
 
+
 namespace LootsIt\LaravelMailTemplateChannel\Providers;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-use LootsIt\LaravelMailTemplateChannel\Drivers\MailjetTemplateDriver;
-use Lootsit\LaravelMailTemplateChannel\Drivers\MailTemplateDriver;
 use LootsIt\LaravelMailTemplateChannel\ExternalMailTemplateChannel;
 
-class MailTemplateDriverServiceProvider extends ServiceProvider implements DeferrableProvider
+class MailTemplateChannelServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * All of the container singletons that should be registered.
@@ -16,7 +15,7 @@ class MailTemplateDriverServiceProvider extends ServiceProvider implements Defer
      * @var array
      */
     public $singletons = [
-        MailTemplateDriver::class => MailjetTemplateDriver::class
+        ExternalMailTemplateChannel::class
     ];
 
     /**
@@ -27,7 +26,7 @@ class MailTemplateDriverServiceProvider extends ServiceProvider implements Defer
     public function provides()
     {
         return [
-            MailTemplateDriver::class
+            ExternalMailTemplateChannel::class
         ];
     }
 }
