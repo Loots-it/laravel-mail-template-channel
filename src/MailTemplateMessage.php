@@ -8,7 +8,7 @@ namespace Lootsit\ExternalMailTemplateChannel;
 class MailTemplateMessage
 {
     public int $templateID;
-    public array $variables;
+    public $variables;
 
     public string $subject;
 
@@ -20,7 +20,7 @@ class MailTemplateMessage
     public string $replyToEmail;
     public string $replyToName;
 
-    public function __construct(int $templateID, array $variables)
+    public function __construct(int $templateID, $variables)
     {
         $this->$templateID = $templateID;
         $this->$variables = $variables;
