@@ -5,6 +5,7 @@ namespace LootsIt\LaravelMailTemplateChannel\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
+use LootsIt\LaravelMailTemplateChannel\ExternalMailTemplateChannel;
 use LootsIt\LaravelMailTemplateChannel\TestNotification;
 
 class TestExternalMailTemplateChannel extends Command
@@ -37,13 +38,15 @@ class TestExternalMailTemplateChannel extends Command
      * Execute the console command.
      *
      * @param int $templateID
-     * @return int
+     * @param ExternalMailTemplateChannel $channel
+     * @return void
      */
-    public function handle(int $templateID)
+    public function handle(int $templateID, ExternalMailTemplateChannel $channel)
     {
+        $user = User::factory()->make();
         $notification = new TestNotification($templateID);
 
-        if (User::factory()->make()->notify($notification)) {
+        if ($channel->send($user, $notification)) {
             $this->info("The configuration of the mail template driver is correct.");
         }
         else {
