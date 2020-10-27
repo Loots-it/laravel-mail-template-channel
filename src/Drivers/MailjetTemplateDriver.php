@@ -16,9 +16,6 @@ class MailjetTemplateDriver implements MailTemplateDriver
      */
     private $mj_client;
 
-    private bool $testing = false;
-
-
     /**
      * Create a new mailjet template driver instance.
      *
@@ -30,11 +27,6 @@ class MailjetTemplateDriver implements MailTemplateDriver
         $apisecret = getenv('MAILJET_APISECRET');
 
         $this->mj_client = new Client($apikey, $apisecret, true, ['version' => 'v3.1']);
-    }
-
-    public function setTesting(bool $testing)
-    {
-        $this->testing = $testing;
     }
 
     /**
@@ -72,7 +64,7 @@ class MailjetTemplateDriver implements MailTemplateDriver
 
         $body = ['Messages' => [$body]];
 
-        if ($this->testing) {
+        if ($message->testMessage) {
             $body["SandboxMode"] = true;
         }
 

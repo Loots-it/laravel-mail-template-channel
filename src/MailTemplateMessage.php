@@ -20,6 +20,8 @@ class MailTemplateMessage
     public ?string $replyToEmail = null;
     public ?string $replyToName = null;
 
+    public bool $testMessage = false;
+
     public function __construct(int $templateID, array $variables)
     {
         $this->templateID = $templateID;
