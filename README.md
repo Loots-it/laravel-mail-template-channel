@@ -1,3 +1,15 @@
+<p align="center">
+    <a href="https://packagist.org/packages/loots-it/laravel-mail-template-channel">
+        <img src="https://img.shields.io/packagist/dt/loots-it/laravel-mail-template-channel" alt="Total Downloads">
+    </a>
+    <a href="https://packagist.org/packages/loots-it/laravel-mail-template-channel">
+        <img src="https://img.shields.io/packagist/v/loots-it/laravel-mail-template-channel" alt="Latest Stable Version">
+    </a>
+    <a href="https://packagist.org/packages/loots-it/laravel-mail-template-channel">
+        <img src="https://img.shields.io/packagist/l/loots-it/laravel-mail-template-channel" alt="License">
+    </a>
+</p>
+
 ## Installation
 
 First, include the package with composer:
