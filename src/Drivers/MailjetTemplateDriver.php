@@ -23,8 +23,8 @@ class MailjetTemplateDriver implements MailTemplateDriver
      */
     public function __construct()
     {
-        $apikey = getenv('MAILJET_APIKEY');
-        $apisecret = getenv('MAILJET_APISECRET');
+        $apikey = config('services.mailjet.key');
+        $apisecret = config('services.mailjet.secret');
 
         $this->mj_client = new Client($apikey, $apisecret, true, ['version' => 'v3.1']);
     }

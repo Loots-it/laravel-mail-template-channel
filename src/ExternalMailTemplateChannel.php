@@ -7,11 +7,17 @@ use Lootsit\LaravelMailTemplateChannel\Drivers\MailTemplateDriver;
 
 class ExternalMailTemplateChannel
 {
-    protected $template_mailer;
+    protected MailTemplateDriver $template_mailer;
+
+    private string $standard_from_email;
+    private string $standard_from_name;
 
     public function __construct(MailTemplateDriver $template_mailer)
     {
         $this->template_mailer = $template_mailer;
+
+        $this->standard_from_email = config('external_template_mail.from.email');
+        $this->standard_from_name = config('external_template_mail.from.name');
     }
 
     public function send($notifiable, Notification $notification): bool {
@@ -22,12 +28,12 @@ class ExternalMailTemplateChannel
 
     protected function extendMessage($notifiable, Notification $notification, MailTemplateMessage $message): MailTemplateMessage {
         if (!$message->fromEmail and !$message->fromName) {
-            $message->fromEmail = getenv('MAILJET_FROM_EMAILADDRESS');
-            $message->fromName = getenv('MAILJET_FROM_NAME');
+            $message->fromEmail = $this->standard_from_email;
+            $message->fromName = $this->standard_from_name;
         }
         if (!$message->replyToEmail and !$message->replyToName) {
-            $message->replyToEmail = getenv('MAILJET_FROM_EMAILADDRESS');
-            $message->replyToName = getenv('MAILJET_FROM_NAME');
+            $message->replyToEmail = $this->standard_from_email;
+            $message->replyToName = $this->standard_from_name;
         }
         $message->to ??= $this->getRecipients($notifiable, $notification);
 
