@@ -79,8 +79,8 @@ You can use this Channel for any Notification. As an example, I will create a mi
 php artisan make:notification VerifyEmailNotification
 ```
 
-You can delete the standard **toMail($notifiable)** method if you want. You should change the via method and implement
-the **toExternalMailTemplate($notifiable)** like below:
+You can delete the standard **toMail($notifiable)** method if you want. You should change the **via($notifiable)**
+method and implement the **toExternalMailTemplate($notifiable)** like below:
 
 ```php
 <?php
